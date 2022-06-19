@@ -5,7 +5,7 @@ import React from 'react'
 const Header = () => {
   return (
     <Box 
-        border="1px solid black" 
+        border="1px solid white" 
         display="flex" 
         flexDirection="row" 
         justifyContent="space-between" 

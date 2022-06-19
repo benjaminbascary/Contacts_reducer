@@ -34,7 +34,7 @@ const ContactsTable: FC = () => {
 
 
   return (
-    <TableContainer>
+    <TableContainer margin="0vh 3vh 0vh 3vh">
       <Table variant='striped' size="sm">
         <TableCaption placement='top'>Contacts</TableCaption>
         <Thead>
@@ -57,7 +57,13 @@ const ContactsTable: FC = () => {
                     <Td>{eachUser.name}</Td>
                     <Td>{eachUser.lastname}</Td>
                     <Td>{eachUser.email}</Td>
-                    <Td isNumeric><Button colorScheme="red" onClick={() => handleErase(eachUser.id)}>Erase</Button></Td>           
+                    <Td isNumeric>
+                      <Button 
+                        colorScheme="red" 
+                        onClick={() => handleErase(eachUser.id)}
+                      >Erase
+                      </Button>
+                    </Td>           
                   </Tr>
                 )
               })
