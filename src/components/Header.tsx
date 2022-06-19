@@ -1,9 +1,26 @@
+import { Box, Heading } from '@chakra-ui/react'
+import { Switch } from '@chakra-ui/react'
 import React from 'react'
 
-export const Header = () => {
+const Header = () => {
   return (
-    <>
-        hello
-    </>
+    <Box 
+        border="1px solid black" 
+        display="flex" 
+        flexDirection="row" 
+        justifyContent="space-between" 
+        alignItems="center"
+        >
+        <Heading 
+            margin="1vh">
+            Contacts
+        </Heading>
+        <Switch 
+            margin="1vh" 
+            size="lg"
+            />
+    </Box>
   )
 }
+
+export default Header;
