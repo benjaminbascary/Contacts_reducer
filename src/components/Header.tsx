@@ -16,7 +16,7 @@ const Header = () => {
             Contacts
         </Heading>
         <Switch 
-            margin="1vh" 
+            margin="1vh 8vh 1vh 1vh" 
             size="lg"
             />
     </Box>
