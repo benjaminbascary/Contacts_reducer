@@ -34,12 +34,12 @@ const ContactsTable: FC = () => {
     const userToDelete = state.filter(eachUser => {
       return eachUser.id === id
     });
-    /*const deleteUserAction: usersReducerAction = {
+    const deleteUserAction: usersReducerAction = {
       type: "deleteUser",
-      payload: userToDelete
+      payload: userToDelete[0]
       
     } 
-    dispatch(deleteUserAction);*/
+    dispatch(deleteUserAction);
     console.log(userToDelete);
   }
 

@@ -32,10 +32,6 @@ export const NewUserForm = ({dispatch}: any) => {
         },
     };
 
-    useEffect(() => {
-
-    }, [])
-
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
         console.log(event.target.value);
         setNewUser({...newUser, [event.target.name] : event.target.value});

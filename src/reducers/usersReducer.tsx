@@ -8,7 +8,7 @@ export const usersReducer = (state: user[], action : usersReducerAction ): user[
             
         case "deleteUser":
             return state.filter(eachUser => {
-                return eachUser.id === action.payload.id
+                return eachUser.id !== action.payload.id
             })
             
         default:
