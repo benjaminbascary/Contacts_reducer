@@ -7,13 +7,9 @@ function App() {
 
   const [isActive, setIsActive] = useState<boolean>(false);
 
-  const handleActive = () => {
-    setIsActive(prevValue => !prevValue);
-  }
-
   return (
     <>
-      <Header handleActive={handleActive} />
+      <Header />
       <ContactsTable />
     </>
   );

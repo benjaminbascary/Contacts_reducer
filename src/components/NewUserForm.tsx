@@ -1,20 +1,18 @@
-import React, { ChangeEvent, Dispatch, useEffect, useState } from 'react'
+import { ChangeEvent, Dispatch, ReducerAction, useState } from 'react'
 import { usersReducerAction } from '../types/usersReducerTypes';
 import { nanoid } from 'nanoid';
+import { user } from '../types/user';
 import { 
     Box, 
     Heading,
     Input,
     FormControl,
     FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Button,
-    Flex,
-} from '@chakra-ui/react'
-import { user } from '../types/user'
+} from '@chakra-ui/react';
 
-export const NewUserForm = ({dispatch}: any) => {
+export const NewUserForm = ({dispatch}: {dispatch: (addUserAction: any) => void}) => {
+
     const [newUser, setNewUser] = useState<user>({
         id: '',
         name: '',
@@ -31,14 +29,12 @@ export const NewUserForm = ({dispatch}: any) => {
             email: newUser.email
         },
     };
-
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        console.log(event.target.value);
         setNewUser({...newUser, [event.target.name] : event.target.value});
-    };
-
-    const handleSubmit = (): void => { 
-        dispatch(addUserAction);
+    }
+    
+    const handleSubmit = (): void => {
+            dispatch(addUserAction);
     };
 
     return (
@@ -63,41 +59,42 @@ export const NewUserForm = ({dispatch}: any) => {
                 padding="15px" 
                 justifyContent="center"
                 >
-                <Box margin="0px 10px 0px 10px">
+                <FormControl margin="0px 10px 0px 10px">
                     <FormLabel>Email address</FormLabel>
-                    <Input 
+                    <Input
                         onChange={handleChange} 
-                        isInvalid={false} 
                         type='text' 
                         name='email' 
-                        value={newUser.email}/>
-                </Box>
-                <Box margin="0px 10px 0px 10px">
+                        value={newUser.email}
+                    />
+                </FormControl>
+                <FormControl margin="0px 10px 0px 10px">
                     <FormLabel>Name</FormLabel>
                     <Input 
-                        onChange={handleChange} 
-                        isInvalid={false} 
+                        onChange={handleChange}  
                         type='text' 
                         name='name' 
-                        value={newUser.name}/>
-                </Box>
-                <Box margin="0px 10px 0px 10px">
-                    <FormLabel>Lastname</FormLabel>
+                        value={newUser.name}
+                    />
+                </FormControl>
+                <FormControl  margin="0px 10px 0px 10px">
+                    <FormLabel>Last Name</FormLabel>
                     <Input 
                         onChange={handleChange} 
-                        isInvalid={false} 
                         type='text' 
                         name='lastname' 
-                        value={newUser.lastname}/>
-                </Box>
+                        value={newUser.lastname}
+                    />
+                </FormControl>
                 <Box 
                     display='Flex' 
                     flexDirection='row' 
                     justifyContent='center' 
                     alignItems='center' 
-                    marginTop='4vh'
+                    marginTop='3.5vh'
                     >
                     <Button 
+                        size="lg"
                         colorScheme="linkedin"
                         onClick={handleSubmit}
                     >Add

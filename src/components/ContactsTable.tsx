@@ -1,9 +1,8 @@
-import React, { FC, useEffect, useReducer, useState } from 'react'
-import { user } from '../types/user';
+import { FC, useEffect, useReducer, useState } from 'react'
 import { usersReducer } from '../reducers/usersReducer';
 import { NewUserForm } from './NewUserForm';
 import { usersReducerAction } from '../types/usersReducerTypes';
-import { initialiceUsersFromLocalStorage, setUsersIntoLocalStorage} from '../localstorage/usersLocalStorageHandler';
+import { localStorageUsers as localStorage } from '../localstorage/usersLocalStorageHandler';
 import {
   Table,
   Thead,
@@ -19,21 +18,19 @@ import {
 const ContactsTable: FC = () => {
 
   const [ show, setShow] = useState<boolean>(false);
-  const [ users, setUsers ] = useState<user[]>([]);
-  const [ state, dispatch ] = useReducer(usersReducer, users, initialiceUsersFromLocalStorage);
+  const [ users, dispatch ] = useReducer(usersReducer, [], localStorage.getUsers);
 
   useEffect(() => {
-    setUsersIntoLocalStorage(state);
-  }, [state]);
+    localStorage.setUsers(users);
+  }, [users]);
 
   const handleErase = (id: string) => {
-    const userToDelete = state.filter(eachUser => {
-      return eachUser.id === id
+    const userToDelete = users.filter(eachUser => {
+      return eachUser.id === id;
     });
     const deleteUserAction: usersReducerAction = {
       type: "deleteUser",
       payload: userToDelete[0]
-      
     } 
     dispatch(deleteUserAction);
   }
@@ -44,7 +41,7 @@ const ContactsTable: FC = () => {
 
   return (
     <>
-    <Button onClick={handleShow}>Add new user</Button>
+    <Button size="lg" colorScheme="pink" marginLeft="2vh" onClick={handleShow}>{show ? 'Close' : '+ Add new user'}</Button>
     {
       show && <NewUserForm dispatch={dispatch} />
     }
@@ -64,7 +61,7 @@ const ContactsTable: FC = () => {
         <Tbody>
           {
             users &&
-              state.map(eachUser => {
+              users.map(eachUser => {
                 return (
                   <Tr key={eachUser.id}>
                     <Td>{eachUser.id}</Td>
@@ -75,7 +72,7 @@ const ContactsTable: FC = () => {
                       <Button 
                         colorScheme="red" 
                         onClick={() => handleErase(eachUser.id)}
-                      >Erase
+                        >Erase
                       </Button>
                     </Td>           
                   </Tr>
