@@ -1,4 +1,9 @@
 import React, { FC, useEffect, useReducer, useState } from 'react'
+import { user } from '../types/user';
+import { usersReducer } from '../reducers/usersReducer';
+import { NewUserForm } from './NewUserForm';
+import { usersReducerAction } from '../types/usersReducerTypes';
+import { initialiceUsersFromLocalStorage, setUsersIntoLocalStorage} from '../localstorage/usersLocalStorageHandler';
 import {
   Table,
   Thead,
@@ -10,25 +15,16 @@ import {
   TableContainer,
   Button,
 } from '@chakra-ui/react';
-import { user } from '../types/user';
-import { usersReducer } from '../reducers/usersReducer';
-import { NewUserForm } from './NewUserForm';
-import { usersReducerAction } from '../types/usersReducerTypes';
 
 const ContactsTable: FC = () => {
 
   const [ show, setShow] = useState<boolean>(false);
   const [ users, setUsers ] = useState<user[]>([]);
-  const [ state, dispatch ] = useReducer(usersReducer, users)
+  const [ state, dispatch ] = useReducer(usersReducer, users, initialiceUsersFromLocalStorage);
 
   useEffect(() => {
-    console.log(state);
-  }, []);
-
-  useEffect(() => {
-    
-  }, [users]);
-
+    setUsersIntoLocalStorage(state);
+  }, [state]);
 
   const handleErase = (id: string) => {
     const userToDelete = state.filter(eachUser => {
@@ -40,7 +36,6 @@ const ContactsTable: FC = () => {
       
     } 
     dispatch(deleteUserAction);
-    console.log(userToDelete);
   }
 
   const handleShow = () => {
