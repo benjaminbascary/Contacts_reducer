@@ -1,6 +1,6 @@
 import { user } from "./user"
 
 export type usersReducerAction = {
-    type : 'getAllUsers' | 'updateUser' | 'deleteUser' | 'addUser',
+    type : 'addUser' | 'getAllUsers',
     payload: user;
 }

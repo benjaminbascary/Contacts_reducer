@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { ChangeEvent, Dispatch, useState } from 'react'
+import { usersReducerAction } from '../types/usersReducerTypes';
+import { nanoid } from 'nanoid';
 import { 
     Box, 
     Heading,
@@ -10,12 +12,31 @@ import {
     Button,
     Flex,
 } from '@chakra-ui/react'
+import { user } from '../types/user'
 
-export const NewUserForm = () => {
+export const NewUserForm = ({dispatch}: any) => {
 
-    const handleSubmit = () => {
-        console.log("submited")
-    }
+    const [newUser, setNewUser] = useState<user>({
+        id: nanoid(),
+        name: '',
+        lastname: '',
+        email: ''
+    });
+
+    const addUserAction: usersReducerAction = {
+        type: 'addUser',
+        payload: newUser,
+    };
+
+    const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+        console.log(event.target.value);
+        setNewUser({...newUser, [event.target.name] : event.target.value});
+    };
+
+    const handleSubmit = (): void => { 
+        dispatch(addUserAction);
+    };
+
     return (
         <Box 
             display='flex' 
@@ -40,15 +61,25 @@ export const NewUserForm = () => {
                 >
                 <Box margin="0px 10px 0px 10px">
                     <FormLabel>Email address</FormLabel>
-                    <Input isInvalid={false} type='text' />
+                    <Input 
+                        onChange={handleChange} 
+                        isInvalid={false} 
+                        type='text' 
+                        name='email' 
+                        value={newUser.email}/>
                 </Box>
                 <Box margin="0px 10px 0px 10px">
                     <FormLabel>Name</FormLabel>
-                    <Input isInvalid={false} type='text' />
+                    <Input 
+                        onChange={handleChange} 
+                        isInvalid={false} 
+                        type='text' 
+                        name='name' 
+                        value={newUser.name}/>
                 </Box>
                 <Box margin="0px 10px 0px 10px">
                     <FormLabel>Lastname</FormLabel>
-                    <Input isInvalid={false} type='text' />
+                    <Input onChange={handleChange} isInvalid={false} type='text' name='lastname' value={newUser.lastname}/>
                 </Box>
                 <Box 
                     display='Flex' 

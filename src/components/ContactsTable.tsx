@@ -1,4 +1,4 @@
-import React, { FC, ReducerState, useEffect, useReducer, useState } from 'react'
+import React, { FC, useEffect, useReducer, useState } from 'react'
 import {
   Table,
   Thead,
@@ -10,23 +10,22 @@ import {
   TableContainer,
   Button,
 } from '@chakra-ui/react';
-import { fakeUsers } from '../db/users';
 import { user } from '../types/user';
 import { usersReducer } from '../reducers/usersReducer';
+import { NewUserForm } from './NewUserForm';
 
 const ContactsTable: FC = () => {
 
+  const [show, setShow] = useState<boolean>(false);
   const [ users, setUsers ] = useState<user[]>([]);
-  const reducer = useReducer(usersReducer, users);
+  const [ state, dispatch ] = useReducer(usersReducer, users)
 
   useEffect(() => {
-    setUsers(fakeUsers);
-    console.log('loading users...');
+    console.log(state);
   }, []);
 
-
   useEffect(() => {
-    console.log(reducer);
+    
   }, [users]);
 
 
@@ -34,8 +33,16 @@ const ContactsTable: FC = () => {
     console.log("Erasing..." + id)
   }
 
+  const handleShow = () => {
+    setShow(previousValue => !previousValue);
+  }
 
   return (
+    <>
+    <Button onClick={handleShow}>Add new user</Button>
+    {
+      show && <NewUserForm dispatch={dispatch} />
+    }
     <TableContainer margin="0vh 3vh 0vh 3vh">
       <Table variant='striped' size="sm">
         <TableCaption placement='top'>Contacts</TableCaption>
@@ -52,7 +59,7 @@ const ContactsTable: FC = () => {
         <Tbody>
           {
             users &&
-              users.map(eachUser => {
+              state.map(eachUser => {
                 return (
                   <Tr key={eachUser.id}>
                     <Td>{eachUser.id}</Td>
@@ -74,6 +81,7 @@ const ContactsTable: FC = () => {
 
       </Table>
     </TableContainer>
+    </>
   )
 }
 

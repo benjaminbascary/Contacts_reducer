@@ -18,7 +18,6 @@ const Header = ({ handleActive }: HeaderProps) => {
             margin="1vh">
             Contacts
         </Heading>
-        <Button onClick={handleActive}>Add new user</Button>
         <Switch 
             margin="1vh 8vh 1vh 1vh" 
             size="lg"

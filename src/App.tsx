@@ -14,13 +14,6 @@ function App() {
   return (
     <>
       <Header handleActive={handleActive} />
-      {
-        isActive ? (
-            <NewUserForm />
-          ) : (
-            null
-          )
-      }
       <ContactsTable />
     </>
   );
