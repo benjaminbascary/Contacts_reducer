@@ -1,21 +1,15 @@
 import { user } from "../types/user";
-import { UsersReducerAction } from "../types/usersReducerTypes";
+import { usersReducerAction } from "../types/usersReducerTypes";
 
-
-class UsersReducer {
-    private state: user[] = []
-    
-    getUsers(action : UsersReducerAction ) {
-        switch(action.type) {
-            case "addUser":
-                return [...this.state, action.payload];
-        }
+export const usersReducer = (state: user[], action : usersReducerAction): user[] => {
+    switch(action.type) {
+        case "addUser":
+            return [...state, action.payload];
+            
+        case "getAllUsers":
+            return state;
+            
+        default:
+            return state;
     }
-
-    private deleteUser(id: string) {
-
-    }
-
 }
-
-export const usersReducer = new UsersReducer;

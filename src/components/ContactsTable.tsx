@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, ReducerState, useEffect, useReducer, useState } from 'react'
 import {
   Table,
   Thead,
@@ -12,10 +12,12 @@ import {
 } from '@chakra-ui/react';
 import { fakeUsers } from '../db/users';
 import { user } from '../types/user';
+import { usersReducer } from '../reducers/usersReducer';
 
 const ContactsTable: FC = () => {
 
-  const [ users, setUsers ] = useState<user[]>();
+  const [ users, setUsers ] = useState<user[]>([]);
+  const reducer = useReducer(usersReducer, users);
 
   useEffect(() => {
     setUsers(fakeUsers);
@@ -24,7 +26,7 @@ const ContactsTable: FC = () => {
 
 
   useEffect(() => {
-    // waiting to be filled when the reducer is setted up!
+    console.log(reducer);
   }, [users]);
 
 
