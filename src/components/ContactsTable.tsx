@@ -13,10 +13,11 @@ import {
 import { user } from '../types/user';
 import { usersReducer } from '../reducers/usersReducer';
 import { NewUserForm } from './NewUserForm';
+import { usersReducerAction } from '../types/usersReducerTypes';
 
 const ContactsTable: FC = () => {
 
-  const [show, setShow] = useState<boolean>(false);
+  const [ show, setShow] = useState<boolean>(false);
   const [ users, setUsers ] = useState<user[]>([]);
   const [ state, dispatch ] = useReducer(usersReducer, users)
 
@@ -30,7 +31,16 @@ const ContactsTable: FC = () => {
 
 
   const handleErase = (id: string) => {
-    console.log("Erasing..." + id)
+    const userToDelete = state.filter(eachUser => {
+      return eachUser.id === id
+    });
+    /*const deleteUserAction: usersReducerAction = {
+      type: "deleteUser",
+      payload: userToDelete
+      
+    } 
+    dispatch(deleteUserAction);*/
+    console.log(userToDelete);
   }
 
   const handleShow = () => {

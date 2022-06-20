@@ -6,8 +6,10 @@ export const usersReducer = (state: user[], action : usersReducerAction ): user[
         case "addUser":
             return [...state, action.payload];
             
-        case "getAllUsers":
-            return state;
+        case "deleteUser":
+            return state.filter(eachUser => {
+                return eachUser.id === action.payload.id
+            })
             
         default:
             return state;

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch, useState } from 'react'
+import React, { ChangeEvent, Dispatch, useEffect, useState } from 'react'
 import { usersReducerAction } from '../types/usersReducerTypes';
 import { nanoid } from 'nanoid';
 import { 
@@ -15,9 +15,8 @@ import {
 import { user } from '../types/user'
 
 export const NewUserForm = ({dispatch}: any) => {
-
     const [newUser, setNewUser] = useState<user>({
-        id: nanoid(),
+        id: '',
         name: '',
         lastname: '',
         email: ''
@@ -25,8 +24,17 @@ export const NewUserForm = ({dispatch}: any) => {
 
     const addUserAction: usersReducerAction = {
         type: 'addUser',
-        payload: newUser,
+        payload: {
+            id: nanoid(),
+            name: newUser.name,
+            lastname: newUser.lastname,
+            email: newUser.email
+        },
     };
+
+    useEffect(() => {
+
+    }, [])
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
         console.log(event.target.value);
@@ -79,7 +87,12 @@ export const NewUserForm = ({dispatch}: any) => {
                 </Box>
                 <Box margin="0px 10px 0px 10px">
                     <FormLabel>Lastname</FormLabel>
-                    <Input onChange={handleChange} isInvalid={false} type='text' name='lastname' value={newUser.lastname}/>
+                    <Input 
+                        onChange={handleChange} 
+                        isInvalid={false} 
+                        type='text' 
+                        name='lastname' 
+                        value={newUser.lastname}/>
                 </Box>
                 <Box 
                     display='Flex' 
