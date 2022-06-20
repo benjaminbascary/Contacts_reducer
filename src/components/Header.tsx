@@ -1,8 +1,11 @@
 import { Box, Heading } from '@chakra-ui/react'
-import { Switch } from '@chakra-ui/react'
-import React from 'react'
+import { Switch, Button } from '@chakra-ui/react'
 
-const Header = () => {
+type HeaderProps = {
+    handleActive: () => void;
+}
+
+const Header = ({ handleActive }: HeaderProps) => {
   return (
     <Box 
         border="1px solid white" 
@@ -15,6 +18,7 @@ const Header = () => {
             margin="1vh">
             Contacts
         </Heading>
+        <Button onClick={handleActive}>Add new user</Button>
         <Switch 
             margin="1vh 8vh 1vh 1vh" 
             size="lg"
