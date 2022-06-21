@@ -34,7 +34,11 @@ export const NewUserForm = ({dispatch}: {dispatch: (addUserAction: any) => void}
     }
     
     const handleSubmit = (): void => {
+        if (!newUser.name || !newUser.lastname || !newUser.email) {
+            return
+        } else {
             dispatch(addUserAction);
+        }
     };
 
     return (

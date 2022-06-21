@@ -20,7 +20,7 @@ const Header = () => {
       <Heading
           size="4xl" 
           margin="1vh">
-          Contacts
+          Contacts!!
       </Heading>
       <IconButton
           aria-label='Switch mode'
