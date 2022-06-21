@@ -72,6 +72,7 @@ const ContactsTable: FC = () => {
                       <Button 
                         colorScheme="red" 
                         onClick={() => handleErase(eachUser.id)}
+                        data-testid='erasebutton'
                         >Erase
                       </Button>
                     </Td>           

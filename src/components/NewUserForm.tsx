@@ -70,6 +70,8 @@ export const NewUserForm = ({dispatch}: {dispatch: (addUserAction: any) => void}
                         type='text' 
                         name='email' 
                         value={newUser.email}
+                        placeholder="email"
+                        data-testid='form'
                     />
                 </FormControl>
                 <FormControl margin="0px 10px 0px 10px">
@@ -79,6 +81,8 @@ export const NewUserForm = ({dispatch}: {dispatch: (addUserAction: any) => void}
                         type='text' 
                         name='name' 
                         value={newUser.name}
+                        placeholder="name"
+                        data-testid='form'
                     />
                 </FormControl>
                 <FormControl  margin="0px 10px 0px 10px">
@@ -88,6 +92,8 @@ export const NewUserForm = ({dispatch}: {dispatch: (addUserAction: any) => void}
                         type='text' 
                         name='lastname' 
                         value={newUser.lastname}
+                        placeholder="last name"
+                        data-testid='form'
                     />
                 </FormControl>
                 <Box 
@@ -101,7 +107,7 @@ export const NewUserForm = ({dispatch}: {dispatch: (addUserAction: any) => void}
                         size="lg"
                         colorScheme="linkedin"
                         onClick={handleSubmit}
-                    >Add
+                    >Add!
                     </Button>
                 </Box>
                 
